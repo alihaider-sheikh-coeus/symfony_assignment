@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+{% block navbar %}
+
+
+
+{% endblock %}
+{% block title %}Hello ReviewController!{% endblock %}
+
+{% block body %}
+
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+    {% if app.session.flashBag.has('success') %}
+        <div class="alert alert-error fade in" role="alert">
+            {% for msg in app.session.flashBag.get('success') %}
+                {{ msg }}
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% if app.session.flashBag.has('error') %}
+        <div class="alert alert-error fade in" role="alert">
+            {% for msg in app.session.flashBag.get('error') %}
+                {{ msg }}
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="example-wrapper">
+        <h3>Reviews</h3>
+        <div class="row" style = margin-bottom:55px;">
+            <div class="col-md-12">
+                <table id="ftable" class="table table-condensed table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Name</th>
+                        <th>Password</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for account in accounts %}
+                        <tr>
+                            <td>{{ account.accountId }}</td>
+                            <td>{{ account.name }}</td>
+                            <td>{{ account.password }}</td>
+                                <td class = "actions">
+{#                                        <a href="{{ path('status_update', { 'id': review.id,'status':"approve" }) }}"#}
+{#                                           class = "btn btn-sm btn-info glyphicon-ok"  title="approve"> Approve</a>#}
+
+                                        <a href="{{ path('account_delete', { 'id': account.id}) }}"
+                                           class = "btn btn-sm btn-primary glyphicon glyphicon-remove"  title="Delete">Delete</a>
+                                    </td>
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <a href="{{ path('new_account')}}"
+                   class = "btn btn-sm btn-primary glyphicon glyphicon-add"  title="Delete">NewAccount</a>
+            </div>
+        </div>
+    </div>
+
+{#    {% set _currentPage = app.request.query.get('p') ?: 1 %}#}
+{#    {% set _currentRoute = app.request.attributes.get('_route') %}#}
+{#    {% set _currentParams = app.request.query.all %}#}
+{#    {% if lastPage > 1 %}#}
+{#        <nav>#}
+{#            <ul class="pagination">#}
+{#                {% if _currentPage > 1 %}#}
+{#                    <li class="page-item">#}
+{#                        <a class="page-link" href="{{ path(_currentRoute, _currentParams|merge({p: _currentPage - 1})) }}" aria-label="Previous">#}
+{#                            <span aria-hidden="true">&laquo;</span>#}
+{#                            <span class="sr-only">Previous</span>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                {% endif %}#}
+{#                {% for i in 1..lastPage %}#}
+{#                    <li class="page-item {% if i == _currentPage %}active{% endif %}">#}
+{#                        <a class="page-link" href="{{ path(_currentRoute, _currentParams|merge({p: i})) }}">{{ i }}</a>#}
+{#                    </li>#}
+{#                {% endfor %}#}
+{#                {% if _currentPage < lastPage %}#}
+{#                    <li class="page-item">#}
+{#                        <a class="page-link" href="{{ path(_currentRoute, _currentParams|merge({p: _currentPage + 1})) }}" aria-label="Next">#}
+{#                            <span aria-hidden="true">&raquo;</span>#}
+{#                            <span class="sr-only">Next</span>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                {% endif %}#}
+{#            </ul>#}
+{#        </nav>#}
+{#    {% endif %}#}
+{#    #}
+{% endblock %}

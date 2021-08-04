@@ -48,9 +48,10 @@ class FormQuestionImport
     private $status;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Account", inversedBy="formquestionimport")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $account_id;
+    private $account;
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -149,17 +150,7 @@ class FormQuestionImport
         return $this;
     }
 
-    public function getAccountId(): ?int
-    {
-        return $this->account_id;
-    }
 
-    public function setAccountId(int $account_id): self
-    {
-        $this->account_id = $account_id;
-
-        return $this;
-    }
 
     public function getDownloadedAt(): ?\DateTimeImmutable
     {
@@ -207,5 +198,21 @@ class FormQuestionImport
         $this->max_range = $max_range;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccount()
+    {
+        return $this->account;
+    }
+
+    /**
+     * @param mixed $account
+     */
+    public function setAccount($account): void
+    {
+        $this->account = $account;
     }
 }

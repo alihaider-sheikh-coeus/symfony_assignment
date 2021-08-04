@@ -31,14 +31,17 @@ $this->setName('ImportFormQuestions')
 }
 protected function execute(InputInterface $input, OutputInterface $output)
 {
+//    dd('helo');
     $base_uri = 'https://sff.coddle.de/api/v2/forms/';
     $path = $input->getArgument('form_id') . '/questions';
+//    dd($path);
     $header = [
         'interface-id' =>  $input->getArgument('shopid'),
         'interface-password'=> $input->getArgument('password'),
     ];
 
     $client = new \GuzzleHttp\Client(['base_uri' => $base_uri]);
+//    dd($client);
     try {
         $res = $client->request('GET', $path, ['headers' => $header]);
         $status = $res->getStatusCode();

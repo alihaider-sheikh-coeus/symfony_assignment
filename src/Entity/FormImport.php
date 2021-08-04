@@ -48,10 +48,10 @@ class FormImport
     private $is_default_form_of_default_survey;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Account", inversedBy="formImports")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $account_id;
-
+    private $account;
     /**
      * @ORM\Column(type="datetime_immutable")
      */
@@ -139,18 +139,6 @@ class FormImport
         return $this;
     }
 
-    public function getAccountId(): ?int
-    {
-        return $this->account_id;
-    }
-
-    public function setAccountId(int $account_id): self
-    {
-        $this->account_id = $account_id;
-
-        return $this;
-    }
-
     public function getDownloadedAt(): ?\DateTimeImmutable
     {
         return $this->downloaded_at;
@@ -173,5 +161,21 @@ class FormImport
         $this->form_id = $form_id;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccount()
+    {
+        return $this->account;
+    }
+
+    /**
+     * @param mixed $account
+     */
+    public function setAccount($account): void
+    {
+        $this->account = $account;
     }
 }
