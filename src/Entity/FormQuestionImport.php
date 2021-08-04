@@ -57,6 +57,21 @@ class FormQuestionImport
      */
     private $downloaded_at;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_conditional_question;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $min_range;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $max_range;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -154,6 +169,42 @@ class FormQuestionImport
     public function setDownloadedAt(\DateTimeImmutable $downloaded_at): self
     {
         $this->downloaded_at = $downloaded_at;
+
+        return $this;
+    }
+
+    public function getIsConditionalQuestion(): ?bool
+    {
+        return $this->is_conditional_question;
+    }
+
+    public function setIsConditionalQuestion(bool $is_conditional_question): self
+    {
+        $this->is_conditional_question = $is_conditional_question;
+
+        return $this;
+    }
+
+    public function getMinRange(): ?int
+    {
+        return $this->min_range;
+    }
+
+    public function setMinRange(?int $min_range): self
+    {
+        $this->min_range = $min_range;
+
+        return $this;
+    }
+
+    public function getMaxRange(): ?int
+    {
+        return $this->max_range;
+    }
+
+    public function setMaxRange(?int $max_range): self
+    {
+        $this->max_range = $max_range;
 
         return $this;
     }

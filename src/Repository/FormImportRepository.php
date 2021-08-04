@@ -21,7 +21,7 @@ class FormImportRepository extends ServiceEntityRepository
     public function insertForms($data,$shopId)
     {
         $em = $this->getEntityManager();
-      $time = new \DateTimeImmutable();
+        $time = new \DateTimeImmutable();
         foreach ($data as $d)
         {
             $form = new FormImport();
@@ -39,8 +39,6 @@ class FormImportRepository extends ServiceEntityRepository
 
         $em->flush();
         $em->clear();
-
-
-    }
+  }
 
 }

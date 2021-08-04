@@ -6,6 +6,7 @@ use App\Entity\FormImport;
 use App\Entity\FormQuestionImport;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\Types\Null_;
 
 /**
  * @method FormQuestionImport|null find($id, $lockMode = null, $lockVersion = null)
@@ -22,7 +23,6 @@ class FormQuestionImportRepository extends ServiceEntityRepository
 
     public function insertFormQuestions($data,$shopId)
     {
-        dd($data,$shopId);
         $em = $this->getEntityManager();
         $time = new \DateTimeImmutable();
         foreach ($data as $d)
@@ -32,7 +32,13 @@ class FormQuestionImportRepository extends ServiceEntityRepository
             $formQuestion->setQuestionLabel($d['question_label']);
             $formQuestion->setParentId($d['parent_id']);
             $formQuestion->setIsRequired($d['is_required']);
-            
+            $formQuestion->setStatus($d['status']);
+            $formQuestion->setQuestionType($d['question_type']);
+            $formQuestion->setIsConditionalQuestion($d['is_conditional_question']);
+            $formQuestion->setAccountId($shopId);
+            $formQuestion->setDownloadedAt($time);
+            ( !empty($d['min_range'])) ? $formQuestion->setMinRange($d['min_range']):"";
+            ( !empty($d['max_range'])) ? $formQuestion->setMaxRange($d['max_range']):"";
 
             $em->persist($formQuestion);
         }
