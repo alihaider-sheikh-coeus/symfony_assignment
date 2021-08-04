@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AccountCntrollerController!{% endblock %}
+
+{% block body %}
+    <h1>Create new Account!</h1>
+    {{form_start(form)}}
+    {{form_widget(form)}}
+    <div class="class row">
+        <div class="class col-sm-offset col-sm-10">
+            <button name='create' type='submit' value='create' class='btn btn-primary'>Save</button>
+            <a href="{{ path('account_index')}}"
+               class = "btn btn-sm btn-primary glyphicon glyphicon-add"  title="showAccount">IndexAccount</a>
+        </div>
+    </div>
+    {{form_end(form)}}
+{% endblock %}
